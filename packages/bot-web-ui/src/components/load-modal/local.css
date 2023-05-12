@@ -1,0 +1,59 @@
+.container {
+    display: grid;
+    grid-template-columns: repeat(2, 360px);
+    gap: 20px;
+}
+
+.button_container {
+    background-color: #1d0e38;
+    border-radius: 1.25rem;
+    padding: 20px;
+    justify-content: space-between;
+    flex: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.button_container:hover {
+    background-color: #332240;
+}
+
+.box {
+    height: 3rem;
+    width: 6px;
+    border-radius: 0.313rem;
+    background-color: #fff;
+}
+
+.text_container {
+    display: flex;
+    flex-direction: column;
+}
+
+.text_title {
+    margin-left: 1rem;
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.text_description {
+    margin-left: 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #fff;
+}
+
+@media screen and (max-width: 500px) {
+    .container {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 10px;
+        margin: 10px;
+        max-height: 15rem;
+    }
+
+    .box {
+        height: 2rem;
+    }
+}

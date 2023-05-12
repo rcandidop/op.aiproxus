@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Proxus</title>
+        <meta charset="utf-8" />
+        <meta name="referrer" content="origin" />
+        <script>
+            window.addEventListener('message', function (message) {
+                // let domain_url = '';
+                // if (window.location.hostname.indexOf('deriv.me') > -1) {
+                //     domain_url = 'deriv.me';
+                // } else if (window.location.hostname.indexOf('deriv.be') > -1) {
+                //     domain_url = 'deriv.be';
+                // } else {
+                //     domain_url = 'deriv.com';
+                // }
+                var allowed_origins = [
+                    'https://localhost.binary.sx/bot',
+                    'https://hml.aiproxus.com',
+                    'https://op.aiproxus.com',
+                ];
+
+                // https://localhost.binary.sx/bot?acct1=CR4937130&token1=a1-u6AbUEY0wNZAVRFs5m1N4EMHp0WpJ&cur1=USD&acct2=VRTC7168684&token2=a1-ECXn7EA2gFKZPKi8JNZ8HZQLCQPEW&cur2=USD&state=
+
+                if (allowed_origins) {
+                    switch (message.data.key) {
+                        case 'active_loginid':
+                        case 'client.accounts': {
+                            if (localStorage.getItem(message.data.key) !== message.data.value) {
+                                localStorage.setItem(message.data.key, message.data.value);
+                            }
+                            break;
+                        }
+                    }
+                }
+            });
+        </script>
+    </head>
+
+    <body></body>
+</html>

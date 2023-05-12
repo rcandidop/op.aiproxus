@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+    <head>
+        <!-- Set skeleton theme color properties -->
+        <style>
+            :root {
+                --logo-loading-color: rgba(0, 0, 0, 0.8);
+                --header-footer-bg-color: rgba(0, 0, 0, 0.04);
+                --content-bg-color: #fff;
+                --general-main-1: #ffffff;
+                --general-section-1: #f2f3f4;
+                --text-prominent: #333333;
+                font-size: 62.5%;
+            }
+
+            #platform_name:after {
+                content: var(--app-shell-platform-name);
+                margin-left: 8px;
+            }
+
+            .deriv-app > .header__loading {
+                background-color: var(--general-main-1);
+                border-bottom: var(--general-main-1);
+            }
+
+            .deriv-app > .app-contents__loading {
+                background-color: var(--general-main-1);
+            }
+
+            .deriv-app > .footer__loading {
+                background-color: var(--general-main-1);
+                border-bottom: var(--general-main-1);
+            }
+
+            .initial-loader__loading {
+                background-color: var(--general-main-1);
+            }
+        </style>
+        <script type="text/javascript">
+            !(function () {
+                if ('PerformanceLongTaskTiming' in window) {
+                    var g = (window.__tti = { e: [] });
+                    g.o = new PerformanceObserver(function (l) {
+                        g.e = g.e.concat(l.getEntries());
+                    });
+                    g.o.observe({ entryTypes: ['longtask'] });
+                }
+            })();
+        </script>
+        <script type="text/javascript">
+            var ui_store = localStorage.getItem('ui_store');
+            var l = window.location;
+            var is_bot =
+                /^\/bot/.test(l.pathname) || (/^\/(br_)/.test(l.pathname) && l.pathname.split('/')[2] === 'bot');
+
+            if (ui_store && ui_store.length > 0) {
+                var is_dark_theme = false;
+                if (is_bot) {
+                    // TODO: [disable-dark-bot] Re-enable dark theme when Bot is ready
+                    is_dark_theme = false;
+                } else {
+                    is_dark_theme = JSON.parse(ui_store).is_dark_mode_on || false;
+                }
+
+                if (is_dark_theme) {
+                    // if dark theme, change the property colors for dark theme
+                    document.documentElement.style.setProperty('--header-footer-bg-color', '#0b0e18');
+                    document.documentElement.style.setProperty('--content-bg-color', '#101320');
+                    document.documentElement.style.setProperty('--logo-loading-color', '#fff');
+                    document.documentElement.style.setProperty('--general-main-1', '#0e0e0e');
+                    document.documentElement.style.setProperty('--general-section-1', '#151717');
+                    document.documentElement.style.setProperty('--text-prominent', '#ffffff');
+                }
+            }
+        </script>
+        <!-- End theme styles -->
+        <!-- Start Anti-Clickjack -->
+        <style id="antiClickjack">
+            body {
+                display: none !important;
+            }
+        </style>
+        <script type="text/javascript">
+            // if (self === top) {
+            //     var antiClickjack = document.getElementById('antiClickjack');
+            //     antiClickjack.parentNode.removeChild(antiClickjack);
+            // } else {
+            //     top.location = self.location;
+            // }
+
+            var antiClickjack = document.getElementById('antiClickjack');
+            antiClickjack.parentNode.removeChild(antiClickjack);
+        </script>
+        <!-- End Anti-Clickjack -->
+
+        <noscript>Your browser does not support JavaScript!</noscript>
+
+        <!-- Start RudderStack Script -->
+        <script type="text/javascript">
+            const isProduction = () => {
+                return (
+                    // window.location.hostname === 'app.deriv.com' ||
+                    // window.location.hostname === 'app.deriv.me' ||
+                    // window.location.hostname === 'app.deriv.be' ||
+                    window.location.hostname === 'op.aiproxus.com/bot'
+                );
+            };
+
+            rudderanalytics = window.rudderanalytics = [];
+
+            var methods = [
+                'load',
+                'page',
+                'track',
+                'identify',
+                'alias',
+                'group',
+                'ready',
+                'reset',
+                'getAnonymousId',
+                'setAnonymousId',
+            ];
+
+            for (var i = 0; i < methods.length; i++) {
+                var method = methods[i];
+                rudderanalytics[method] = (function (methodName) {
+                    return function () {
+                        rudderanalytics.push([methodName].concat(Array.prototype.slice.call(arguments)));
+                    };
+                })(method);
+            }
+            if (isProduction()) {
+                // Production key
+                rudderanalytics.load('1oV5agvlcnCZ6IH94wCKM1oR8Pd', 'https://deriv-dataplane.rudderstack.com');
+            } else {
+                // Staging keys
+                rudderanalytics.load('1lN3tsFD2nruGFgM5F074DC2hMB', 'https://deriv-dataplane.rudderstack.com');
+            }
+        </script>
+        <script async src="https://cdn.rudderlabs.com/rudder-analytics.min.js"></script>
+        <!-- End RudderStack Script -->
+
+        <!-- Start GTM Script -->
+        <script>
+            var gtm_id = 'GTM-NF7884S';
+            if (window.location.hostname === 'deriv-app.binary.sx') gtm_id = 'GTM-TNX2ZKH';
+            (function (w, d, s, l, i) {
+                w[l] = w[l] || [];
+                w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+                var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s),
+                    dl = l != 'dataLayer' ? '&l=' + l : '';
+                j.defer = true;
+                j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+                f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', gtm_id);
+        </script>
+        <!-- End GTM Script -->
+
+        <!-- Start GTM Script -->
+        <style>
+            .async-hide {
+                opacity: 0 !important;
+            }
+        </style>
+        <script>
+            var gtm_id = 'GTM-NF7884S';
+            if (window.location.hostname === 'deriv-app.binary.sx') gtm_id = 'GTM-TNX2ZKH';
+            (function (a, s, y, n, c, h, i, d, e) {
+                s.className += ' ' + y;
+                h.end = i = function () {
+                    s.className = s.className.replace(RegExp(' ?' + y), '');
+                };
+                (a[n] = a[n] || []).hide = h;
+                setTimeout(function () {
+                    i();
+                    h.end = null;
+                }, c);
+            })(window, document.documentElement, 'async-hide', 'dataLayer', 4000, { [gtm_id]: true });
+        </script>
+        <!-- End GTM Script -->
+
+        <!-- Start URL Handler -->
+        <script type="text/javascript">
+            (function (l) {
+                if (l.search) {
+                    var q = {};
+                    l.search
+                        .slice(1)
+                        .split('&')
+                        .forEach(function (v) {
+                            var a = v.split('=');
+                            q[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
+                        });
+                    if (q.p !== undefined) {
+                        window.history.replaceState(
+                            null,
+                            null,
+                            l.pathname.slice(0, -1) + (q.p || '') + (q.q ? '?' + q.q : '') + l.hash
+                        );
+                    }
+                }
+            })(window.location);
+        </script>
+        <!-- End URL Handler -->
+
+        <!-- Start Cookies script -->
+        <script src="https://static.deriv.com/scripts/cookie.js" async></script>
+        <!-- End Cookies script -->
+
+        <meta
+            name="description"
+            content=" Deriv gives everyone an easy way to participate in the financial markets. Trade with as little as $1 USD on major currencies, stocks, indices, and commodities."
+        />
+        <meta
+            name="keywords"
+            content=" digital options, forex, forex trading, online trading, financial trading, binary trading, index trading, trading indices, forex trades, trading commodities, digital options strategy, binary broker, binary bet, digital options trading platform, binary strategy, finance, stocks, investment, trading"
+        />
+        <meta name="author" content="Deriv" />
+        <!-- TODO: iOS zoom bug for input elements means we'll get a lower user accessibility score since we're not allowing app.deriv.com to be scalable on mobile -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <meta name="theme-color" content="#2a3052" />
+        <meta name="dcterms.rightsHolder" content="Deriv" />
+        <meta name="dcterms.rights" content="Deriv" />
+        <meta name="google-site-verification" content="g5u3TyEdmYJ_HKZ6EmpW1nlKwD4XPVeLMhN9leeMfuw" />
+        <meta property="og:description" content="" />
+        <meta property="og:title" content="Deriv" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="" />
+        <!-- TODO: Use og_image.gif once the new design is ready -->
+        <meta name="google" content="notranslate" />
+        <meta name="referrer" content="origin" />
+
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://browser-update.org" />
+
+        <link rel="alternate" hreflang="en-EN" href="https://app.deriv.com" />
+        <link rel="canonical" href="https://app.deriv.com" />
+
+        <title>Proxus</title>
+        <meta charset="UTF-8" />
+        <meta name="google-site-verification" content="g5u3TyEdmYJ_HKZ6EmpW1nlKwD4XPVeLMhN9leeMfuw" />
+    </head>
+
+    <body class="body theme">
+        <!-- Start GTM NoScript -->
+        <noscript
+            ><iframe
+                src="https://www.googletagmanager.com/ns.html?id=GTM-NF7884S"
+                height="0"
+                width="0"
+                style="display: none; visibility: hidden"
+            ></iframe
+        ></noscript>
+        <!-- End GTM NoScript -->
+        <!-- Start GTM NoScript of GTM Test Environment -->
+        <noscript
+            ><iframe
+                src="https://www.googletagmanager.com/ns.html?id=GTM-TNX2ZKH"
+                height="0"
+                width="0"
+                style="display: none; visibility: hidden"
+            ></iframe
+        ></noscript>
+        <!-- End GTM NoScript of GTM Test Environment -->
+
+        <!-- TODO: Display shell platform icon and text based on route -->
+
+        <div id="deriv_app" class="deriv-app">
+            <header
+                class="header__loading"
+                style="
+                    background: var(--general-main-1);
+                    border-bottom: 1px solid var(--general-section-1);
+                    position: fixed;
+                    z-index: 99;
+                    box-sizing: border-box;
+                    height: 48px;
+                    width: 100%;
+                    top: 0;
+                "
+            ></header>
+            <div class="app-contents app-contents__loading" style="margin-bottom: 0; overflow: hidden">
+                <div class="initial-loader initial-loader__loading">
+                    <div class="initial-loader__barspinner barspinner barspinner-light">
+                        <div class="initial-loader__barspinner--rect barspinner__rect barspinner__rect--1 rect1"></div>
+                        <div class="initial-loader__barspinner--rect barspinner__rect barspinner__rect--2 rect2"></div>
+                        <div class="initial-loader__barspinner--rect barspinner__rect barspinner__rect--3 rect3"></div>
+                        <div class="initial-loader__barspinner--rect barspinner__rect barspinner__rect--4 rect4"></div>
+                        <div class="initial-loader__barspinner--rect barspinner__rect barspinner__rect--5 rect5"></div>
+                    </div>
+                </div>
+            </div>
+            <footer
+                class="footer__loading"
+                style="
+                    background: var(--general-main-1);
+                    border-top: 1px solid var(--general-section-1);
+                    position: fixed;
+                    bottom: 0;
+                    width: 100%;
+                    height: 37px;
+                    z-index: 3;
+                "
+            ></footer>
+        </div>
+        <div id="modal_root" class="modal-root"></div>
+        <div id="modal_root_absolute" class="modal-root modal-root--absolute"></div>
+        <!-- modal_root has background color. So, it cannot be used for toast messages. For those cases popup_root is used -->
+        <div id="popup_root" class="popup-root"></div>
+        <!-- Temporary Mobile Landscape UI Blocker -->
+        <div id="landscape_blocker" class="landscape-blocker">
+            <div class="landscape-blocker__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="62" fill="none">
+                    <path
+                        fill="#85ACB0"
+                        d="M52.308 62H9.23a9.204 9.204 0 0 1-6.524-2.727A9.345 9.345 0 0 1 0 52.7V9.3a9.344 9.344 0 0 1 2.707-6.573A9.205 9.205 0 0 1 9.23 0h61.538a9.204 9.204 0 0 1 6.524 2.727A9.345 9.345 0 0 1 80 9.3v24.8a3.104 3.104 0 0 1-1.538 2.685 3.058 3.058 0 0 1-3.077 0 3.104 3.104 0 0 1-1.539-2.685V9.3a3.117 3.117 0 0 0-.902-2.19 3.07 3.07 0 0 0-2.175-.91H9.231a3.07 3.07 0 0 0-2.175.91 3.116 3.116 0 0 0-.902 2.19v43.4c.001.822.325 1.61.902 2.19a3.07 3.07 0 0 0 2.175.91h43.077c1.1 0 2.115.59 2.664 1.55.55.959.55 2.14 0 3.1A3.073 3.073 0 0 1 52.308 62Z"
+                    />
+                    <path
+                        fill="#FF444F"
+                        d="M76.923 62H64.615c-1.1 0-2.115-.592-2.664-1.55a3.121 3.121 0 0 1 0-3.1 3.073 3.073 0 0 1 2.664-1.55h9.231v-9.3c0-1.109.587-2.132 1.539-2.686a3.058 3.058 0 0 1 3.076 0A3.104 3.104 0 0 1 80 46.5v12.4c0 .822-.324 1.611-.901 2.192a3.066 3.066 0 0 1-2.176.908ZM52.352 31.045h12.307c1.1 0 2.116.59 2.665 1.55.55.96.55 2.14 0 3.1a3.072 3.072 0 0 1-2.665 1.55h-9.23v9.3a3.104 3.104 0 0 1-1.539 2.685 3.058 3.058 0 0 1-3.077 0 3.104 3.104 0 0 1-1.538-2.685v-12.4c0-.822.324-1.61.9-2.192a3.066 3.066 0 0 1 2.177-.908Z"
+                    />
+                    <path
+                        fill="#85ACB0"
+                        d="M33.846 18.6H3.077c-1.1 0-2.115-.591-2.665-1.55-.55-.96-.55-2.141 0-3.1a3.073 3.073 0 0 1 2.665-1.55h30.77a3.07 3.07 0 0 0 2.174-.91 3.117 3.117 0 0 0 .902-2.19V3.1c0-1.108.587-2.131 1.539-2.685a3.058 3.058 0 0 1 3.076 0A3.104 3.104 0 0 1 43.078 3.1v6.2a9.344 9.344 0 0 1-2.707 6.573 9.205 9.205 0 0 1-6.524 2.727Z"
+                    />
+                    <path
+                        fill="#FF444F"
+                        d="M76.923 62a3.055 3.055 0 0 1-2.175-.909L54.66 40.852c-.755-.787-1.042-1.917-.755-2.973a3.092 3.092 0 0 1 2.154-2.17c1.048-.29 2.17 0 2.951.76l20.088 20.24a3.114 3.114 0 0 1 0 4.384 3.064 3.064 0 0 1-2.175.907Z"
+                    />
+                </svg>
+            </div>
+            <!-- Since its temporary blocker and landscape will be designed with multilingual support, we can ignore localization for text below -->
+            <div class="landscape-blocker__message--landscape">Please adjust your screen size for optimal viewing.</div>
+            <div class="landscape-blocker__message--portrait">
+                Please adjust your <br />
+                screen size for <br />
+                optimal viewing.
+            </div>
+        </div>
+        <!-- End Temporary Mobile Landscape UI Blocker -->
+        <!-- LiveChat script -->
+        <script type="text/javascript">
+            window.__lc = window.__lc || {};
+            window.__lc.license = 12049137;
+            (function (n, t, c) {
+                function i(n) {
+                    return e._h ? e._h.apply(null, n) : e._q.push(n);
+                }
+                var e = {
+                    _q: [],
+                    _h: null,
+                    _v: '2.0',
+                    on: function () {
+                        i(['on', c.call(arguments)]);
+                    },
+                    once: function () {
+                        i(['once', c.call(arguments)]);
+                    },
+                    off: function () {
+                        i(['off', c.call(arguments)]);
+                    },
+                    get: function () {
+                        if (!e._h) throw new Error('[LiveChatWidget] You can’t use getters before load.');
+                        return i(['get', c.call(arguments)]);
+                    },
+                    call: function () {
+                        i(['call', c.call(arguments)]);
+                    },
+                    init: function () {
+                        var n = t.createElement('script');
+                        (n.async = !0),
+                            (n.type = 'text/javascript'),
+                            (n.src = 'https://cdn.livechatinc.com/tracking.js'),
+                            t.head.appendChild(n);
+                    },
+                };
+                !n.__lc.asyncInit && e.init(), (n.LiveChatWidget = n.LiveChatWidget || e);
+            })(window, document, [].slice);
+        </script>
+        <!-- End LiveChat script -->
+    </body>
+</html>
